@@ -3,21 +3,76 @@ import { Box, Typography } from '@mui/material';
 import {
   imagePageBannerHeight, landingPageStyles, previewGap, previewWidth,
 } from './LandingPageStyles';
-import BGImage from '../../../assets/img/esmeralda.webp';
+import Yorkowish from '../../../assets/img/yorkowish.webp';
+import Esmeralda from '../../../assets/img/esmeralda.webp';
+import LatinTravels from '../../../assets/img/latin_travels.webp';
+import Harvest from '../../../assets/img/harvest.webp';
+import Quasar from '../../../assets/img/quasar.webp';
+import VaseOfFlowers from '../../../assets/img/vase_of_flowers.webp';
+import Serenity from '../../../assets/img/serenity.webp';
 
 function LandingPage() {
   const [hoverImage, setHoverImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [openImagePage, setOpenImagePage] = useState(null);
-  const images = [1, 2, 3, 4, 5];
+  const images = [
+    {
+      id: 'yorkowish',
+      title: 'Yorkowish',
+      artist: 'Willem van de Velde the Younger',
+      year: 1680,
+      image: Yorkowish,
+    },
+    {
+      id: 'esmeralda',
+      title: 'Esmeralda',
+      artist: 'Samuel adams',
+      year: 2022,
+      image: Esmeralda,
+    },
+    {
+      id: 'latin_travels',
+      title: 'Latin travels',
+      artist: 'Willem van de Velde the Younger',
+      year: 1680,
+      image: LatinTravels,
+    },
+    {
+      id: 'harvest',
+      title: 'Harvest',
+      artist: 'Samuel Melton Fisher',
+      year: 1896,
+      image: Harvest,
+    },
+    {
+      id: 'quasar',
+      title: 'Quasar',
+      artist: 'Generative AI',
+      year: 2022,
+      image: Quasar,
+    },
+    {
+      id: 'vase_of_flowers',
+      title: 'Vase of flowers',
+      artist: 'Jan Davidsz. de Heem',
+      year: 2022,
+      image: VaseOfFlowers,
+    },
+    {
+      id: 'serenity',
+      title: 'Serenity',
+      artist: 'Laura Vinck',
+      year: 1670,
+      image: Serenity,
+    },
+  ];
 
-  console.log('hoverImage: ', hoverImage);
   return (
     <Box
       id="landing-page"
       sx={[
         landingPageStyles.page,
-        { backgroundImage: `linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.6)), url(${BGImage})` },
+        { backgroundImage: `linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.6)), url(${Esmeralda})` },
       ]}
       onClick={() => {
         setSelectedImage(null);
@@ -50,9 +105,9 @@ function LandingPage() {
             id="image-preview"
             sx={[landingPageStyles.imagePreview,
               { left: leftBound, right: rightBound },
-              selectedImage === image && landingPageStyles.squarePreviewStyles,
-              openImagePage === image && landingPageStyles.imagePageBannerStyles,
-              (selectedImage !== image && selectedImage !== null) && {
+              selectedImage === image.id && landingPageStyles.squarePreviewStyles,
+              openImagePage === image.id && landingPageStyles.imagePageBannerStyles,
+              (selectedImage !== image.id && selectedImage !== null) && {
                 opacity: 0,
               },
             ]}
@@ -61,10 +116,10 @@ function LandingPage() {
             }}
             onClick={(e) => {
               e.stopPropagation();
-              if (selectedImage === image) {
-                setOpenImagePage(image);
+              if (selectedImage === image.id) {
+                setOpenImagePage(image.id);
               } else {
-                setSelectedImage(image);
+                setSelectedImage(image.id);
               }
             }}
           >
@@ -73,7 +128,7 @@ function LandingPage() {
               height: '100%',
               borderRadius: 'inherit',
 
-              backgroundImage: `url(${BGImage})`,
+              backgroundImage: `url(${image.image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -180,7 +235,7 @@ function LandingPage() {
               borderRadius: '24px',
 
               backgroundColor: 'rgba(255,255,255,0.5)',
-              backgroundImage: `url(${BGImage})`,
+              backgroundImage: `url(${Esmeralda})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
