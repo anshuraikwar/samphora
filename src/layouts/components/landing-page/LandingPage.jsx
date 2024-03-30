@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import {
-  imagePageBannerHeight, landingPageStyles, previewGap, previewWidth,
+  imagePageBannerHeight, landingPageStyles, previewGap, previewHeight, previewWidth,
 } from './LandingPageStyles';
 import Yorkowish from '../../../assets/img/yorkowish.webp';
 import Esmeralda from '../../../assets/img/esmeralda.webp';
@@ -15,84 +15,111 @@ function LandingPage() {
   const [hoverImage, setHoverImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [openImagePage, setOpenImagePage] = useState(null);
-  const images = [
-    {
+  const images = {
+    yorkowish: {
       id: 'yorkowish',
       title: 'Yorkowish',
       artist: 'Willem van de Velde the Younger',
       year: 1680,
       image: Yorkowish,
     },
-    {
-      id: 'esmeralda',
-      title: 'Esmeralda',
-      artist: 'Samuel adams',
-      year: 2022,
-      image: Esmeralda,
-    },
-    {
+    latin_travels: {
       id: 'latin_travels',
       title: 'Latin travels',
       artist: 'Willem van de Velde the Younger',
       year: 1680,
       image: LatinTravels,
     },
-    {
+    esmeralda: {
+      id: 'esmeralda',
+      title: 'Esmeralda',
+      artist: 'Samuel adams',
+      year: 2022,
+      image: Esmeralda,
+    },
+    harvest: {
       id: 'harvest',
       title: 'Harvest',
       artist: 'Samuel Melton Fisher',
       year: 1896,
       image: Harvest,
     },
-    {
+    quasar: {
       id: 'quasar',
       title: 'Quasar',
       artist: 'Generative AI',
       year: 2022,
       image: Quasar,
     },
-    {
+    vase_of_flowers: {
       id: 'vase_of_flowers',
       title: 'Vase of flowers',
       artist: 'Jan Davidsz. de Heem',
       year: 2022,
       image: VaseOfFlowers,
     },
-    {
+    serenity: {
       id: 'serenity',
       title: 'Serenity',
       artist: 'Laura Vinck',
       year: 1670,
       image: Serenity,
     },
-  ];
+  };
 
   return (
     <Box
       id="landing-page"
       sx={[
         landingPageStyles.page,
-        { backgroundImage: `linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.6)), url(${Esmeralda})` },
       ]}
       onClick={() => {
         setSelectedImage(null);
         setOpenImagePage(null);
       }}
     >
-      <Box sx={{
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
+      <Box
+        id="blur-backdrop"
+        sx={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
 
-        backdropFilter: selectedImage !== null ? 'blur(5px)' : 'none',
-      }}
-      >
-        l
-      </Box>
-      {images.map((image, index) => {
-        const counter = index - Math.floor(images.length / 2);
+          backdropFilter: selectedImage !== null ? 'blur(5px)' : 'none',
+
+          zIndex: 2,
+        }}
+      />
+      {Object.values(images).map((image) => (
+        <Box
+          id={`bg-${image.id}`}
+          sx={[
+            {
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+
+              backgroundImage: `linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.6)), url(${image.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+
+              opacity: 0,
+              transition: 'opacity 0.5s linear',
+              zIndex: 1,
+            },
+            (hoverImage === image.id
+              || selectedImage === image.id
+              || openImagePage === image.id) && { opacity: 1 },
+          ]}
+        />
+      ))}
+
+      {Object.values(images).map((image, index) => {
+        const counter = index - Math.floor(Object.keys(images).length / 2);
 
         let leftBound = `calc(50vw - ((${previewWidth} / 2) + (${Math.abs(counter)} * (${previewGap} + ${previewWidth}))))`;
         let rightBound = `calc(50vw + ((${previewWidth} / 2) + (${Math.abs(counter)} * ${previewGap}) + ((${Math.abs(counter)} - 1) * ${previewWidth})))`;
@@ -105,6 +132,9 @@ function LandingPage() {
             id="image-preview"
             sx={[landingPageStyles.imagePreview,
               { left: leftBound, right: rightBound },
+              (hoverImage === image.id) && {
+                top: `calc(50vh - ( ${previewHeight} / 2 ) - 28px)`,
+              },
               selectedImage === image.id && landingPageStyles.squarePreviewStyles,
               openImagePage === image.id && landingPageStyles.imagePageBannerStyles,
               (selectedImage !== image.id && selectedImage !== null) && {
@@ -112,7 +142,10 @@ function LandingPage() {
               },
             ]}
             onMouseEnter={() => {
-              setHoverImage(image);
+              setHoverImage(image.id);
+            }}
+            onMouseLeave={() => {
+              setHoverImage(null);
             }}
             onClick={(e) => {
               e.stopPropagation();
@@ -132,9 +165,7 @@ function LandingPage() {
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
-            >
-              i
-            </Box>
+            />
           </Box>
         );
       })}
@@ -161,6 +192,8 @@ function LandingPage() {
             flexDirection: 'column',
             justifyContent: 'start',
             gap: '24px',
+
+            zIndex: 5,
           }}
           onClick={(e) => {
             e.stopPropagation();
@@ -235,13 +268,11 @@ function LandingPage() {
               borderRadius: '24px',
 
               backgroundColor: 'rgba(255,255,255,0.5)',
-              backgroundImage: `url(${Esmeralda})`,
+              backgroundImage: `url(${images[openImagePage]?.image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
-            >
-              image
-            </Box>
+            />
           </Box>
         </Box>
       </Box>

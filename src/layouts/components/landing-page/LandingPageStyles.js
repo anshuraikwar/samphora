@@ -35,6 +35,7 @@ export const landingPageStyles = {
       + ' background-color 0.5s linear,'
       + ' padding 0.5s linear,'
       + ' opacity 0.5s linear',
+    zIndex: 5,
   },
 
   squarePreviewStyles: {
@@ -46,7 +47,7 @@ export const landingPageStyles = {
     padding: 0,
     borderRadius: '40px',
 
-    zIndex: 1,
+    zIndex: 6,
   },
   imagePageBannerStyles: {
     top: '0',
@@ -57,7 +58,7 @@ export const landingPageStyles = {
     padding: '8px 8px 0',
     borderRadius: '20px',
 
-    zIndex: 1,
+    zIndex: 7,
   },
 
   imagePageContent: {
@@ -71,5 +72,6 @@ export const landingPageStyles = {
 
     transition: 'top 0.5s linear',
     overflow: 'auto',
+    zIndex: 5,
   },
 };
