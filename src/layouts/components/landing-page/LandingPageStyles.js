@@ -88,9 +88,10 @@ export const landingPageStyles = {
     top: 0,
     bottom: 0,
     left: 0,
+    right: 0,
 
     height: '100%',
-    padding: '32px',
+    padding: '0',
 
     display: 'flex',
     flexDirection: 'column',
@@ -102,6 +103,7 @@ export const landingPageStyles = {
     transition: 'padding 0.5s linear,'
       + ' opacity 0.5s linear,'
       + ' transform 0.5s linear',
+    overflow: 'hidden',
     zIndex: 3,
   },
   imageYear: {
@@ -178,12 +180,14 @@ export const landingPageStyles = {
     justifyContent: 'start',
     gap: '24px',
 
+    textAlign: 'left',
+
     zIndex: 5,
   },
   imagePageContentImage: {
     flexShrink: 0,
-    width: '290px',
-    height: 'inherit',
+    width: { xs: '100%', md: '290px' },
+    height: { xs: '300px', md: 'inherit' },
     borderRadius: '24px',
 
     backgroundSize: 'cover',

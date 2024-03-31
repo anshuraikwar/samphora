@@ -164,6 +164,8 @@ function LandingPage() {
                 sx={[
                   landingPageStyles.imageTitleSubtitleBox,
                   (selectedImage === image.id) && {
+                    padding: '32px',
+
                     transform: 'translateY(0)',
                     transition: 'padding 0.5s linear,'
                       + ' opacity 0.5s linear 0.4s,'
@@ -222,12 +224,13 @@ function LandingPage() {
         }}
       >
         <Box
+          id="image-page-content"
           sx={landingPageStyles.imagePageContent}
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
-          <Typography color="colors.white">
+          <Typography color="colors.white" align="inherit">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Etiam tincidunt eros id erat imperdiet venenatis.
             Sed non elit eu est pretium rhoncus. Sed risus velit,
@@ -249,6 +252,7 @@ function LandingPage() {
           <Box
             sx={{
               display: 'flex',
+              flexDirection: { xs: 'column-reverse', md: 'row' },
               gap: 'inherit',
             }}
           >
@@ -259,7 +263,7 @@ function LandingPage() {
                 gap: 'inherit',
               }}
             >
-              <Typography color="colors.white">
+              <Typography color="colors.white" align="inherit">
                 Duis tempus lacus nec ultricies fringilla. Duis
                 ac interdum sem, venenatis pharetra enim. Donec
                 ultricies tristique convallis. Vestibulum tempor
@@ -273,7 +277,7 @@ function LandingPage() {
                 sit amet arcu at, tempor suscipit purus. Donec eget
                 neque enim. Fusce tincidunt. Fusce tincidunt.
               </Typography>
-              <Typography color="colors.white">
+              <Typography color="colors.white" align="inherit">
                 Duis tempus lacus nec ultricies fringilla. Duis ac
                 interdum sem, venenatis pharetra enim. Donec
                 ultricies tristique convallis. Vestibulum tempor
