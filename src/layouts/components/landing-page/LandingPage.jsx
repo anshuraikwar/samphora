@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import {
-  imagePageBannerHeight, landingPageStyles, previewGap, previewHeight, previewWidth,
+  imagePageBannerHeight,
+  imagePageContentHPadding,
+  imagePageContentMobileHPadding,
+  landingPageStyles,
+  previewGap,
+  previewWidth,
 } from './LandingPageStyles';
 import Yorkowish from '../../../assets/img/yorkowish.webp';
 import Esmeralda from '../../../assets/img/esmeralda.webp';
@@ -80,36 +85,16 @@ function LandingPage() {
     >
       <Box
         id="blur-backdrop"
-        sx={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-
-          backdropFilter: selectedImage !== null ? 'blur(5px)' : 'none',
-
-          zIndex: 2,
-        }}
+        sx={[landingPageStyles.blurBackdrop,
+          { backdropFilter: selectedImage !== null ? 'blur(5px)' : 'none' }]}
       />
       {Object.values(images).map((image) => (
         <Box
           id={`bg-${image.id}`}
           sx={[
+            landingPageStyles.imageBackground,
             {
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-
               backgroundImage: `linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.6)), url(${image.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-
-              opacity: 0,
-              transition: 'opacity 0.5s linear',
-              zIndex: 1,
             },
             (hoverImage === image.id
               || selectedImage === image.id
@@ -129,12 +114,12 @@ function LandingPage() {
         }
         return (
           <Box
-            id="image-preview"
-            sx={[landingPageStyles.imagePreview,
+            id="carousel-image-preview"
+            sx={[landingPageStyles.carouselImagePreview,
               { left: leftBound, right: rightBound },
-              (hoverImage === image.id) && {
-                top: `calc(50vh - ( ${previewHeight} / 2 ) - 28px)`,
-              },
+              // (hoverImage === image.id) && {
+              //   top: `calc(50vh - ( ${previewHeight} / 2 ) - 28px)`,
+              // },
               selectedImage === image.id && landingPageStyles.squarePreviewStyles,
               openImagePage === image.id && landingPageStyles.imagePageBannerStyles,
               (selectedImage !== image.id && selectedImage !== null) && {
@@ -156,24 +141,77 @@ function LandingPage() {
               }
             }}
           >
-            <Box sx={{
-              width: '100%',
-              height: '100%',
-              borderRadius: 'inherit',
+            <Box
+              id="carousel-preview-content"
+              sx={landingPageStyles.carouselPreviewContent}
+            >
+              <Box
+                id="carousel-image"
+                sx={[
+                  landingPageStyles.carouselImage,
+                  { backgroundImage: `url(${image.image})` },
+                  (hoverImage === image.id) && {
+                    transform: 'translateY(-28px)',
+                  },
+                  (selectedImage === image.id
+                    || openImagePage === image.id) && {
+                    transform: 'translateY(0)',
+                  },
+                ]}
+              />
+              <Box
+                id="image-title-subtitle"
+                sx={[
+                  landingPageStyles.imageTitleSubtitleBox,
+                  (selectedImage === image.id) && {
+                    transform: 'translateY(0)',
+                    transition: 'padding 0.5s linear,'
+                      + ' opacity 0.5s linear 0.4s,'
+                      + ' transform 0.5s linear 0.4s',
+                    opacity: 1,
+                  },
+                  (openImagePage === image.id) && {
+                    padding: { xs: `16px ${imagePageContentMobileHPadding}`, md: `32px ${imagePageContentHPadding}` },
+                  },
+                ]}
+              >
+                <Typography color="colors.white" sx={landingPageStyles.imageYear}>{image.year}</Typography>
+                <Box sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'start',
+                }}
+                >
+                  <Typography color="colors.white" sx={landingPageStyles.imageTitle}>{image.title}</Typography>
+                  <Typography color="colors.white" sx={landingPageStyles.imageSubtitle}>
+                    by
+                    {' '}
+                    {image.artist}
+                  </Typography>
+                </Box>
+                <Box />
+              </Box>
+              <Box sx={[
+                landingPageStyles.carouselDot,
+                (selectedImage === image.id
+                  || openImagePage === image.id) && {
+                  bottom: '24px',
+                  right: '24px',
 
-              backgroundImage: `url(${image.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-            />
+                  transform: 'translateX(0)',
+                  zIndex: 2,
+                },
+              ]}
+              />
+            </Box>
           </Box>
         );
       })}
 
       <Box
-        id="image-page-content"
+        id="image-page-content-wrapper"
         sx={[
-          landingPageStyles.imagePageContent,
+          landingPageStyles.imagePageContentWrapper,
           openImagePage !== null && {
             top: imagePageBannerHeight,
           },
@@ -184,17 +222,7 @@ function LandingPage() {
         }}
       >
         <Box
-          sx={{
-            width: '100%',
-            padding: '24px 0',
-
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'start',
-            gap: '24px',
-
-            zIndex: 5,
-          }}
+          sx={landingPageStyles.imagePageContent}
           onClick={(e) => {
             e.stopPropagation();
           }}
@@ -261,17 +289,8 @@ function LandingPage() {
               </Typography>
             </Box>
 
-            <Box sx={{
-              flexShrink: 0,
-              width: '290px',
-              height: 'inherit',
-              borderRadius: '24px',
-
-              backgroundColor: 'rgba(255,255,255,0.5)',
-              backgroundImage: `url(${images[openImagePage]?.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
+            <Box sx={[landingPageStyles.imagePageContentImage,
+              { backgroundImage: `url(${images[openImagePage]?.image})` }]}
             />
           </Box>
         </Box>
