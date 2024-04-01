@@ -1,13 +1,10 @@
+import { imagePageBannerHeight } from '../image-details/ImageDetailsStyles';
+
 export const previewWidth = '32px';
 export const previewHeight = '358px';
 export const previewGap = '16px';
 
 export const previewSquareDimension = 'min(min(90vh, 90vw), 700px)';
-
-export const imagePageBannerHeight = '300px';
-
-export const imagePageContentHPadding = '24vw';
-export const imagePageContentMobileHPadding = '16px';
 
 export const landingPageStyles = {
   page: {
@@ -18,64 +15,6 @@ export const landingPageStyles = {
 
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-  },
-  appBar: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-
-    padding: '21px',
-
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-
-    zIndex: 10,
-  },
-  nav: {
-    display: { xs: 'none', md: 'flex' },
-
-    flexGrow: 1,
-    maxWidth: '330px',
-
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  drawer: {
-    width: '100vw',
-    flexShrink: 0,
-
-    '& .MuiDrawer-paper': {
-      backgroundColor: 'transparent',
-      backdropFilter: 'blur(5px)',
-
-      width: '100vw',
-      boxSizing: 'border-box',
-    },
-  },
-  crossButtonDiv: {
-    padding: '24px',
-
-    display: 'flex',
-    justifyContent: 'end',
-  },
-  crossButton: {
-    padding: 0,
-    display: 'flex',
-  },
-
-  drawerNav: {
-    width: '100%',
-    display: 'flex',
-    padding: '24px',
-
-    flexGrow: 1,
-
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'start',
-    gap: '24px',
   },
 
   blurBackdrop: {
@@ -260,41 +199,5 @@ export const landingPageStyles = {
     borderRadius: '20px',
 
     zIndex: 7,
-  },
-
-  imagePageContentWrapper: {
-    position: 'absolute',
-    top: '100vh',
-    bottom: 0,
-    left: 0,
-    right: 0,
-
-    padding: { xs: `0 ${imagePageContentMobileHPadding}`, md: `0 ${imagePageContentHPadding}` },
-
-    transition: 'top 0.5s linear',
-    overflow: 'auto',
-    zIndex: 5,
-  },
-  imagePageContent: {
-    width: '100%',
-    padding: '24px 0',
-
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'start',
-    gap: '24px',
-
-    textAlign: 'left',
-
-    zIndex: 5,
-  },
-  imagePageContentImage: {
-    flexShrink: 0,
-    width: { xs: '100%', md: '290px' },
-    height: { xs: '300px', md: 'inherit' },
-    borderRadius: '24px',
-
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
   },
 };

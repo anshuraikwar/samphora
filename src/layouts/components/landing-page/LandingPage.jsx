@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import {
-  Box, Drawer, IconButton, Typography, useMediaQuery,
-} from '@mui/material';
-import {
-  imagePageBannerHeight,
-  imagePageContentHPadding,
-  imagePageContentMobileHPadding,
-  landingPageStyles,
-  previewGap,
-  previewWidth,
-} from './LandingPageStyles';
+
+// import: styles
+import { Box, IconButton, Typography } from '@mui/material';
+import { landingPageStyles, previewGap, previewWidth } from './LandingPageStyles';
+import { imagePageContentHPadding, imagePageContentMobileHPadding } from '../image-details/ImageDetailsStyles';
+
+// import: assets
 import Yorkowish from '../../../assets/img/yorkowish.webp';
 import Esmeralda from '../../../assets/img/esmeralda.webp';
 import LatinTravels from '../../../assets/img/latin_travels.webp';
@@ -17,31 +13,25 @@ import Harvest from '../../../assets/img/harvest.webp';
 import Quasar from '../../../assets/img/quasar.webp';
 import VaseOfFlowers from '../../../assets/img/vase_of_flowers.webp';
 import Serenity from '../../../assets/img/serenity.webp';
-
-import { ReactComponent as MenuIcon } from '../../../assets/svg/menu.svg';
-import { ReactComponent as CrossIcon } from '../../../assets/svg/cross.svg';
 import { ReactComponent as ArrowButtonIcon } from '../../../assets/svg/arrow-button.svg';
+
+// import: config
+// import: constants
 import { ReusableComponentIDs } from '../../../constants/enums/ReusableComponentIDs.ts';
 
-function LandingPage() {
-  const isSmallScreen = useMediaQuery('(max-width:900px)');
+// import: utils
+// import: services
+// import: redux
+// import: components
+import AppBar from '../app-bar/AppBar';
+import ImageDetails from '../image-details/ImageDetails';
 
+// import: lazy load components
+
+function LandingPage() {
   const [hoverImage, setHoverImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [openImagePage, setOpenImagePage] = useState(null);
-  const [openDrawer, setOpenDrawer] = useState(false);
-
-  const menuItems = [
-    'Portfolio',
-    'Background',
-    'contact',
-  ];
-  const handleDrawerOpen = () => {
-    setOpenDrawer(true);
-  };
-  const handleDrawerClose = () => {
-    setOpenDrawer(false);
-  };
 
   const closeImageDetailsPage = (e) => {
     e.stopPropagation();
@@ -113,116 +103,7 @@ function LandingPage() {
       ]}
       onClick={closeImageDetailsPage}
     >
-      <Box
-        id="app-bar"
-        sx={landingPageStyles.appBar}
-      >
-        <Typography
-          color="colors.white"
-          sx={{
-            fontSize: '18px',
-            fontWeight: 500,
-            cursor: 'pointer',
-          }}
-        >
-          Samphora
-        </Typography>
-        <Box
-          id="nav"
-          sx={landingPageStyles.nav}
-        >
-          {menuItems.map((item) => (
-            <Typography
-              key={item}
-              id={item}
-              color="colors.white"
-              sx={{
-                fontSize: '11px',
-                cursor: 'pointer',
-              }}
-            >
-              {item}
-            </Typography>
-          ))}
-        </Box>
-
-        <Typography
-          color="colors.white"
-          sx={{
-            fontSize: '11px',
-            display: { xs: 'none', md: 'flex' },
-            cursor: 'pointer',
-          }}
-        >
-          Settings
-        </Typography>
-
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          disableRipple
-          sx={{
-            padding: 0,
-            display: { xs: 'flex', md: 'none' },
-
-            ...(openDrawer && { display: 'none' }),
-          }}
-        >
-          <MenuIcon />
-        </IconButton>
-      </Box>
-      {isSmallScreen && (
-        <Drawer
-          sx={landingPageStyles.drawer}
-          anchor="right"
-          open={openDrawer}
-        >
-          <Box
-            id="cross-button"
-            sx={landingPageStyles.crossButtonDiv}
-          >
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerClose}
-              edge="start"
-              disableRipple
-              sx={landingPageStyles.crossButton}
-            >
-              <CrossIcon />
-            </IconButton>
-          </Box>
-          <Box
-            id="nav"
-            sx={landingPageStyles.drawerNav}
-          >
-            {menuItems.map((item) => (
-              <Typography
-                key={item}
-                id={item}
-                color="colors.white"
-                sx={{
-                  fontSize: '11px',
-                  cursor: 'pointer',
-                }}
-                onClick={handleDrawerClose}
-              >
-                {item}
-              </Typography>
-            ))}
-            <Typography
-              color="colors.white"
-              sx={{
-                fontSize: '11px',
-              }}
-            >
-              Settings
-            </Typography>
-          </Box>
-        </Drawer>
-      )}
+      <AppBar />
 
       <Box
         id="blur-backdrop"
@@ -374,97 +255,12 @@ function LandingPage() {
         );
       })}
 
-      <Box
-        id="image-page-content-wrapper"
-        sx={[
-          landingPageStyles.imagePageContentWrapper,
-          (openImagePage !== null
-            && openImagePage === selectedImage) && {
-            top: imagePageBannerHeight,
-          },
-        ]}
-        onClick={closeImageDetailsPage}
-      >
-        <Box
-          id="image-page-content"
-          sx={landingPageStyles.imagePageContent}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          <Box
-            id={ReusableComponentIDs.IMAGE_DETAIL_PAGE_SCROLL_TO_TOP}
-            sx={{ width: '100%', height: 0 }}
-          />
-          <Typography color="colors.white" align="inherit">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Etiam tincidunt eros id erat imperdiet venenatis.
-            Sed non elit eu est pretium rhoncus. Sed risus velit,
-            semper nec pharetra non, tincidunt quis magna. Nullam
-            porttitor, turpis in imperdiet accumsan, massa nulla
-            tincidunt ipsum, eget hendrerit nisi metus vitae mi.
-            Etiam consequat consequat purus vel sodales. Nullam
-            eros tellus, consequat vitae euismod non, sollicitudin
-            sed urna. Aenean commodo nisl et ex blandit dignissim.
-            Donec porttitor efficitur condimentum. Vestibulum
-            finibus dolor non accumsan interdum. Phasellus sagittis,
-            neque sed pulvinar laoreet, dolor sem gravida
-            libero, vitae tincidunt risus metus a diam. Phasellus
-            mattis ut quam id dignissim. Duis mollis at nibh non
-            maximus. Cras pharetra elit quis erat consequat, vitae
-            commodo orci eleifend. Aenean vestibulum viverra est
-            et posuere. Mauris at libero sapien.
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column-reverse', md: 'row' },
-              gap: 'inherit',
-            }}
-          >
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'inherit',
-              }}
-            >
-              <Typography color="colors.white" align="inherit">
-                Duis tempus lacus nec ultricies fringilla. Duis
-                ac interdum sem, venenatis pharetra enim. Donec
-                ultricies tristique convallis. Vestibulum tempor
-                ultrices lectus, in facilisis erat porta eget. Praesent
-                elementum, magna ut feugiat pretium, libero orci
-                varius metus, sit amet ultricies nulla nulla ac leo.
-                Aenean congue leo vitae mauris ultrices feugiat.
-                Vestibulum quis lobortis nunc. Fusce convallis volutpat
-                vestibulum. Sed tellus diam, sodales at vestibulum
-                id, sollicitudin non felis. Nunc metus ante, tempor
-                sit amet arcu at, tempor suscipit purus. Donec eget
-                neque enim. Fusce tincidunt. Fusce tincidunt.
-              </Typography>
-              <Typography color="colors.white" align="inherit">
-                Duis tempus lacus nec ultricies fringilla. Duis ac
-                interdum sem, venenatis pharetra enim. Donec
-                ultricies tristique convallis. Vestibulum tempor
-                ultrices lectus, in facilisis erat porta eget. Praesent
-                elementum, magna ut feugiat pretium, libero orci
-                varius metus, sit amet ultricies nulla nulla ac leo.
-                Aenean congue leo vitae mauris ultrices feugiat.
-                Vestibulum quis lobortis nunc. Fusce convallis volutpat
-                vestibulum. Sed tellus diam, sodales at vestibulum
-                id, sollicitudin non felis. Nunc metus ante, tempor
-                sit amet arcu at, tempor suscipit purus. Donec eget
-                neque enim. Fusce tincidunt. Fusce tincidunt.
-              </Typography>
-            </Box>
-
-            <Box sx={[landingPageStyles.imagePageContentImage,
-              { backgroundImage: `url(${images[openImagePage]?.image})` }]}
-            />
-          </Box>
-        </Box>
-      </Box>
+      <ImageDetails
+        imageUrl={images[openImagePage]?.image}
+        selectedImage={selectedImage}
+        openImagePage={openImagePage}
+        closeImageDetailsPage={closeImageDetailsPage}
+      />
     </Box>
   );
 }
