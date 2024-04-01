@@ -117,9 +117,6 @@ function LandingPage() {
             id="carousel-image-preview"
             sx={[landingPageStyles.carouselImagePreview,
               { left: leftBound, right: rightBound },
-              // (hoverImage === image.id) && {
-              //   top: `calc(50vh - ( ${previewHeight} / 2 ) - 28px)`,
-              // },
               selectedImage === image.id && landingPageStyles.squarePreviewStyles,
               openImagePage === image.id && landingPageStyles.imagePageBannerStyles,
               (selectedImage !== image.id && selectedImage !== null) && {
@@ -160,18 +157,21 @@ function LandingPage() {
                 ]}
               />
               <Box
+                id="square-preview-backdrop-gradient"
+                sx={[
+                  landingPageStyles.imageSquarePreviewBackdropGradient,
+                  (selectedImage === image.id
+                    || openImagePage === image.id) && {
+                    opacity: 1,
+                  },
+                ]}
+              />
+              <Box
                 id="image-title-subtitle"
                 sx={[
                   landingPageStyles.imageTitleSubtitleBox,
-                  (selectedImage === image.id) && {
-                    padding: '32px',
-
-                    transform: 'translateY(0)',
-                    transition: 'padding 0.5s linear,'
-                      + ' opacity 0.5s linear 0.4s,'
-                      + ' transform 0.5s linear 0.4s',
-                    opacity: 1,
-                  },
+                  (selectedImage === image.id)
+                  && landingPageStyles.imageTitleSubtitleBoxSquarePreview,
                   (openImagePage === image.id) && {
                     padding: { xs: `16px ${imagePageContentMobileHPadding}`, md: `32px ${imagePageContentHPadding}` },
                   },
@@ -196,13 +196,7 @@ function LandingPage() {
               <Box sx={[
                 landingPageStyles.carouselDot,
                 (selectedImage === image.id
-                  || openImagePage === image.id) && {
-                  bottom: '24px',
-                  right: '24px',
-
-                  transform: 'translateX(0)',
-                  zIndex: 2,
-                },
+                  || openImagePage === image.id) && landingPageStyles.carouselDotSquarePreviewState,
               ]}
               />
             </Box>

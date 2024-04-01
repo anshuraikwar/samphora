@@ -83,6 +83,17 @@ export const landingPageStyles = {
     transition: 'transform 0.5s linear',
     zIndex: 1,
   },
+  imageSquarePreviewBackdropGradient: {
+    position: 'absolute',
+    inset: 0,
+
+    borderRadius: 'inherit',
+
+    background: 'linear-gradient(rgb(0,0,0,0), rgb(0,0,0,0.6))',
+    opacity: 0,
+    transition: 'opacity 0.5s linear',
+    zIndex: 2,
+  },
   imageTitleSubtitleBox: {
     position: 'absolute',
     top: 0,
@@ -105,6 +116,15 @@ export const landingPageStyles = {
       + ' transform 0.5s linear',
     overflow: 'hidden',
     zIndex: 3,
+  },
+  imageTitleSubtitleBoxSquarePreview: {
+    padding: '32px',
+
+    transform: 'translateY(0)',
+    transition: 'padding 0.5s linear,'
+      + ' opacity 0.5s linear 0.4s,'
+      + ' transform 0.5s linear 0.4s',
+    opacity: 1,
   },
   imageYear: {
     fontSize: '16px',
@@ -133,6 +153,13 @@ export const landingPageStyles = {
       + ' right 0.5s linear,'
       + 'transform 0.5s linear',
     zIndex: 0,
+  },
+  carouselDotSquarePreviewState: {
+    bottom: '24px',
+    right: '24px',
+
+    transform: 'translateX(0)',
+    zIndex: 2,
   },
 
   squarePreviewStyles: {
