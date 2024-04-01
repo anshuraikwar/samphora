@@ -60,7 +60,8 @@ export const landingPageStyles = {
       + ' height 0.5s linear,'
       + ' background-color 0.5s linear,'
       + ' padding 0.5s linear,'
-      + ' opacity 0.5s linear',
+      + ' opacity 0.5s linear,'
+      + ' border-radius 0.5s linear',
     zIndex: 5,
   },
   carouselPreviewContent: {
@@ -122,8 +123,8 @@ export const landingPageStyles = {
 
     transform: 'translateY(0)',
     transition: 'padding 0.5s linear,'
-      + ' opacity 0.5s linear 0.4s,'
-      + ' transform 0.5s linear 0.4s',
+      + ' opacity 0.5s linear 0.5s,'
+      + ' transform 0.5s linear 0.5s',
     opacity: 1,
   },
   imageYear: {

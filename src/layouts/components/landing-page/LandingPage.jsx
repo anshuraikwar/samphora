@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import {
+  Box, Drawer, IconButton, Typography, useMediaQuery,
+} from '@mui/material';
 import {
   imagePageBannerHeight,
   imagePageContentHPadding,
@@ -16,10 +18,29 @@ import Quasar from '../../../assets/img/quasar.webp';
 import VaseOfFlowers from '../../../assets/img/vase_of_flowers.webp';
 import Serenity from '../../../assets/img/serenity.webp';
 
+import { ReactComponent as MenuIcon } from '../../../assets/svg/menu.svg';
+import { ReactComponent as CrossIcon } from '../../../assets/svg/cross.svg';
+
 function LandingPage() {
+  const isSmallScreen = useMediaQuery('(max-width:900px)');
+
   const [hoverImage, setHoverImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [openImagePage, setOpenImagePage] = useState(null);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const menuItems = [
+    'Portfolio',
+    'Background',
+    'contact',
+  ];
+  const handleDrawerOpen = () => {
+    setOpenDrawer(true);
+  };
+  const handleDrawerClose = () => {
+    setOpenDrawer(false);
+  };
+
   const images = {
     yorkowish: {
       id: 'yorkowish',
@@ -83,6 +104,163 @@ function LandingPage() {
         setOpenImagePage(null);
       }}
     >
+      <Box
+        id="app-bar"
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+
+          padding: '21px',
+
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+
+          zIndex: 10,
+        }}
+      >
+        <Typography
+          color="colors.white"
+          sx={{
+            fontSize: '18px',
+            cursor: 'pointer',
+          }}
+        >
+          Samphora
+        </Typography>
+        <Box
+          id="nav"
+          sx={{
+            display: { xs: 'none', md: 'flex' },
+
+            flexGrow: 1,
+            maxWidth: '330px',
+
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          {menuItems.map((item) => (
+            <Typography
+              color="colors.white"
+              sx={{
+                fontSize: '11px',
+                cursor: 'pointer',
+              }}
+            >
+              {item}
+            </Typography>
+          ))}
+        </Box>
+
+        <Typography
+          color="colors.white"
+          sx={{
+            fontSize: '11px',
+            display: { xs: 'none', md: 'flex' },
+            cursor: 'pointer',
+          }}
+        >
+          Settings
+        </Typography>
+
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+          disableRipple
+          sx={{
+            padding: 0,
+            display: { xs: 'flex', md: 'none' },
+
+            ...(openDrawer && { display: 'none' }),
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+      </Box>
+      {isSmallScreen && (
+        <Drawer
+          sx={{
+            width: '100vw',
+            flexShrink: 0,
+
+            '& .MuiDrawer-paper': {
+              backgroundColor: 'transparent',
+              backdropFilter: 'blur(5px)',
+
+              width: '100vw',
+              boxSizing: 'border-box',
+            },
+          }}
+          anchor="right"
+          open={openDrawer}
+        >
+          <Box
+            id="cross-button"
+            sx={{
+              padding: '24px',
+
+              display: 'flex',
+              justifyContent: 'end',
+            }}
+          >
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerClose}
+              edge="start"
+              disableRipple
+              sx={{
+                padding: 0,
+                display: 'flex',
+              }}
+            >
+              <CrossIcon />
+            </IconButton>
+          </Box>
+          <Box
+            id="nav"
+            sx={{
+              width: '100%',
+              display: 'flex',
+              padding: '24px',
+
+              flexGrow: 1,
+
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'start',
+              gap: '24px',
+            }}
+          >
+            {menuItems.map((item) => (
+              <Typography
+                color="colors.white"
+                sx={{
+                  fontSize: '11px',
+                  cursor: 'pointer',
+                }}
+                onClick={handleDrawerClose}
+              >
+                {item}
+              </Typography>
+            ))}
+            <Typography
+              color="colors.white"
+              sx={{
+                fontSize: '11px',
+              }}
+            >
+              Settings
+            </Typography>
+          </Box>
+        </Drawer>
+      )}
+
       <Box
         id="blur-backdrop"
         sx={[landingPageStyles.blurBackdrop,
@@ -174,6 +352,7 @@ function LandingPage() {
                   && landingPageStyles.imageTitleSubtitleBoxSquarePreview,
                   (openImagePage === image.id) && {
                     padding: { xs: `16px ${imagePageContentMobileHPadding}`, md: `32px ${imagePageContentHPadding}` },
+                    justifyContent: 'center',
                   },
                 ]}
               >
