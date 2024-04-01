@@ -133,6 +133,8 @@ function LandingPage() {
         >
           {menuItems.map((item) => (
             <Typography
+              key={item}
+              id={item}
               color="colors.white"
               sx={{
                 fontSize: '11px',
@@ -198,6 +200,8 @@ function LandingPage() {
           >
             {menuItems.map((item) => (
               <Typography
+                key={item}
+                id={item}
                 color="colors.white"
                 sx={{
                   fontSize: '11px',
@@ -251,7 +255,8 @@ function LandingPage() {
         }
         return (
           <Box
-            id="carousel-image-preview"
+            key={`carousel-image-preview-${image.title}`}
+            id={`carousel-image-preview-${image.title}`}
             sx={[landingPageStyles.carouselImagePreview,
               { left: leftBound, right: rightBound },
               selectedImage === image.id && landingPageStyles.squarePreviewStyles,
@@ -269,7 +274,6 @@ function LandingPage() {
             onClick={(e) => {
               e.stopPropagation();
               if (selectedImage === image.id) {
-                console.log('carousel-image-preview');
                 setOpenImagePage(image.id);
               } else {
                 setSelectedImage(image.id);
