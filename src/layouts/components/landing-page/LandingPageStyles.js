@@ -54,6 +54,17 @@ export const landingPageStyles = {
       boxSizing: 'border-box',
     },
   },
+  crossButtonDiv: {
+    padding: '24px',
+
+    display: 'flex',
+    justifyContent: 'end',
+  },
+  crossButton: {
+    padding: 0,
+    display: 'flex',
+  },
+
   drawerNav: {
     width: '100%',
     display: 'flex',
@@ -118,6 +129,7 @@ export const landingPageStyles = {
     borderRadius: 'inherit',
 
     position: 'relative',
+    cursor: 'pointer',
   },
   carouselImage: {
     position: 'relative',
@@ -142,6 +154,22 @@ export const landingPageStyles = {
     opacity: 0,
     transition: 'opacity 0.5s linear',
     zIndex: 2,
+  },
+  backButtonDiv: {
+    position: 'absolute',
+    top: '45px',
+    left: '13px',
+
+    visibility: 'hidden',
+    transform: 'translateX(-100px)',
+    opacity: 0,
+    transition: 'opacity 0.5s linear,'
+      + ' transform 0.5s linear',
+    cursor: 'initial',
+    zIndex: 4,
+  },
+  backButton: {
+    padding: 0,
   },
   imageTitleSubtitleBox: {
     position: 'absolute',

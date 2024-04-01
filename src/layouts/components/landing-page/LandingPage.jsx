@@ -20,6 +20,8 @@ import Serenity from '../../../assets/img/serenity.webp';
 
 import { ReactComponent as MenuIcon } from '../../../assets/svg/menu.svg';
 import { ReactComponent as CrossIcon } from '../../../assets/svg/cross.svg';
+import { ReactComponent as ArrowButtonIcon } from '../../../assets/svg/arrow-button.svg';
+import { ReusableComponentIDs } from '../../../constants/enums/ReusableComponentIDs.ts';
 
 function LandingPage() {
   const isSmallScreen = useMediaQuery('(max-width:900px)');
@@ -39,6 +41,16 @@ function LandingPage() {
   };
   const handleDrawerClose = () => {
     setOpenDrawer(false);
+  };
+
+  const closeImageDetailsPage = (e) => {
+    e.stopPropagation();
+    setSelectedImage(null);
+    setOpenImagePage(() => null);
+    const element = document.getElementById(ReusableComponentIDs.IMAGE_DETAIL_PAGE_SCROLL_TO_TOP);
+    if (element) {
+      element.scrollIntoView({ block: 'end' });
+    }
   };
 
   const images = {
@@ -99,10 +111,7 @@ function LandingPage() {
       sx={[
         landingPageStyles.page,
       ]}
-      onClick={() => {
-        setSelectedImage(null);
-        setOpenImagePage(null);
-      }}
+      onClick={closeImageDetailsPage}
     >
       <Box
         id="app-bar"
@@ -112,6 +121,7 @@ function LandingPage() {
           color="colors.white"
           sx={{
             fontSize: '18px',
+            fontWeight: 500,
             cursor: 'pointer',
           }}
         >
@@ -169,12 +179,7 @@ function LandingPage() {
         >
           <Box
             id="cross-button"
-            sx={{
-              padding: '24px',
-
-              display: 'flex',
-              justifyContent: 'end',
-            }}
+            sx={landingPageStyles.crossButtonDiv}
           >
             <IconButton
               color="inherit"
@@ -182,10 +187,7 @@ function LandingPage() {
               onClick={handleDrawerClose}
               edge="start"
               disableRipple
-              sx={{
-                padding: 0,
-                display: 'flex',
-              }}
+              sx={landingPageStyles.crossButton}
             >
               <CrossIcon />
             </IconButton>
@@ -267,6 +269,7 @@ function LandingPage() {
             onClick={(e) => {
               e.stopPropagation();
               if (selectedImage === image.id) {
+                console.log('carousel-image-preview');
                 setOpenImagePage(image.id);
               } else {
                 setSelectedImage(image.id);
@@ -275,7 +278,8 @@ function LandingPage() {
           >
             <Box
               id="carousel-preview-content"
-              sx={landingPageStyles.carouselPreviewContent}
+              sx={[landingPageStyles.carouselPreviewContent,
+                (openImagePage === image.id) && { cursor: 'initial' }]}
             >
               <Box
                 id="carousel-image"
@@ -301,6 +305,32 @@ function LandingPage() {
                   },
                 ]}
               />
+              <Box
+                id="back-button-div"
+                sx={[
+                  landingPageStyles.backButtonDiv,
+                  (selectedImage === image.id) && {
+                    visibility: 'visible',
+                  },
+                  (openImagePage === image.id) && {
+                    transform: 'translateX(0)',
+                    opacity: 1,
+                    transition: 'opacity 0.5s linear 0.5s,'
+                      + ' transform 0.5s linear 0.5s',
+                    cursor: 'pointer',
+                  },
+                ]}
+              >
+                <IconButton
+                  color="inherit"
+                  aria-label="back button"
+                  onClick={closeImageDetailsPage}
+                  disableRipple
+                  sx={landingPageStyles.backButton}
+                >
+                  <ArrowButtonIcon />
+                </IconButton>
+              </Box>
               <Box
                 id="image-title-subtitle"
                 sx={[
@@ -344,14 +374,12 @@ function LandingPage() {
         id="image-page-content-wrapper"
         sx={[
           landingPageStyles.imagePageContentWrapper,
-          openImagePage !== null && {
+          (openImagePage !== null
+            && openImagePage === selectedImage) && {
             top: imagePageBannerHeight,
           },
         ]}
-        onClick={() => {
-          setSelectedImage(null);
-          setOpenImagePage(null);
-        }}
+        onClick={closeImageDetailsPage}
       >
         <Box
           id="image-page-content"
@@ -360,6 +388,10 @@ function LandingPage() {
             e.stopPropagation();
           }}
         >
+          <Box
+            id={ReusableComponentIDs.IMAGE_DETAIL_PAGE_SCROLL_TO_TOP}
+            sx={{ width: '100%', height: 0 }}
+          />
           <Typography color="colors.white" align="inherit">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Etiam tincidunt eros id erat imperdiet venenatis.
