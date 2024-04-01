@@ -106,20 +106,7 @@ function LandingPage() {
     >
       <Box
         id="app-bar"
-        sx={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-
-          padding: '21px',
-
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-
-          zIndex: 10,
-        }}
+        sx={landingPageStyles.appBar}
       >
         <Typography
           color="colors.white"
@@ -132,15 +119,7 @@ function LandingPage() {
         </Typography>
         <Box
           id="nav"
-          sx={{
-            display: { xs: 'none', md: 'flex' },
-
-            flexGrow: 1,
-            maxWidth: '330px',
-
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
+          sx={landingPageStyles.nav}
         >
           {menuItems.map((item) => (
             <Typography
@@ -184,18 +163,7 @@ function LandingPage() {
       </Box>
       {isSmallScreen && (
         <Drawer
-          sx={{
-            width: '100vw',
-            flexShrink: 0,
-
-            '& .MuiDrawer-paper': {
-              backgroundColor: 'transparent',
-              backdropFilter: 'blur(5px)',
-
-              width: '100vw',
-              boxSizing: 'border-box',
-            },
-          }}
+          sx={landingPageStyles.drawer}
           anchor="right"
           open={openDrawer}
         >
@@ -224,18 +192,7 @@ function LandingPage() {
           </Box>
           <Box
             id="nav"
-            sx={{
-              width: '100%',
-              display: 'flex',
-              padding: '24px',
-
-              flexGrow: 1,
-
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'start',
-              gap: '24px',
-            }}
+            sx={landingPageStyles.drawerNav}
           >
             {menuItems.map((item) => (
               <Typography
