@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 // import: styles
 import { Box, IconButton, Typography } from '@mui/material';
 import {
-  carouselPreviewTranslateYOnHover, landingPageStyles, previewGap, previewWidth,
+  carouselPreviewTranslateYOnHover,
+  landingPageStyles,
+  previewGap,
+  previewHeight,
+  previewSquareDimension,
+  previewWidth,
 } from './LandingPageStyles';
 import { imagePageContentHPadding, imagePageContentMobileHPadding } from '../image-details/ImageDetailsStyles';
 
@@ -34,16 +39,6 @@ function LandingPage() {
   const [hoverImage, setHoverImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [openImagePage, setOpenImagePage] = useState(null);
-
-  const closeImageDetailsPage = (e) => {
-    e.stopPropagation();
-    setSelectedImage(null);
-    setOpenImagePage(() => null);
-    const element = document.getElementById(ReusableComponentIDs.IMAGE_DETAIL_PAGE_SCROLL_TO_TOP);
-    if (element) {
-      element.scrollIntoView({ block: 'end' });
-    }
-  };
 
   const images = {
     yorkowish: {
@@ -95,6 +90,59 @@ function LandingPage() {
       year: 1670,
       image: Serenity,
     },
+  };
+
+  const changeCurrentImage = useCallback((step) => {
+    let currentIndex;
+    if (step > 0) {
+      currentIndex = -1;
+      if (hoverImage !== null) {
+        currentIndex = Object.keys(images).indexOf(hoverImage);
+      }
+      if (currentIndex === Object.keys(images).length - 1) {
+        currentIndex = -1;
+      }
+    } else {
+      currentIndex = Object.keys(images).length;
+      if (hoverImage !== null) {
+        currentIndex = Object.keys(images).indexOf(hoverImage);
+      }
+      if (currentIndex === 0) {
+        currentIndex = Object.keys(images).length;
+      }
+    }
+
+    setHoverImage(() => Object.keys(images)[currentIndex + step]);
+  }, [hoverImage]);
+
+  const keyDownHandler = useCallback((e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      e.stopPropagation();
+      changeCurrentImage(-1);
+    }
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      e.stopPropagation();
+      changeCurrentImage(1);
+    }
+  }, [changeCurrentImage]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, [keyDownHandler]);
+  const closeImageDetailsPage = (e) => {
+    e.stopPropagation();
+    setSelectedImage(null);
+    setOpenImagePage(() => null);
+    const element = document.getElementById(ReusableComponentIDs.IMAGE_DETAIL_PAGE_SCROLL_TO_TOP);
+    if (element) {
+      element.scrollIntoView({ block: 'end' });
+    }
   };
 
   return (
@@ -210,13 +258,8 @@ function LandingPage() {
                   (selectedImage === image.id) && {
                     visibility: 'visible',
                   },
-                  (openImagePage === image.id) && {
-                    transform: 'translateX(0)',
-                    opacity: 1,
-                    transition: 'opacity 0.5s linear 0.5s,'
-                      + ' transform 0.5s linear 0.5s',
-                    cursor: 'pointer',
-                  },
+                  (openImagePage === image.id)
+                  && landingPageStyles.backButtonDivImageDetailsPage,
                 ]}
               >
                 <IconButton
@@ -270,6 +313,71 @@ function LandingPage() {
           </Box>
         );
       })}
+
+      <Box
+        id="image-nav"
+        sx={[{
+          position: 'absolute',
+          top: `calc(50vh + (${previewHeight} / 2) + 77px)`,
+          left: '50%',
+
+          display: 'flex',
+          alignItems: 'center',
+          gap: '36px',
+
+          transform: 'translateX(-50%)',
+          opacity: 1,
+          transition: 'top 0.5s linear,'
+            + ' opacity 0.5s linear',
+          zIndex: 5,
+        },
+        selectedImage !== null && {
+          top: `calc(50vh + (${previewSquareDimension} / 2) + 16px)`,
+        },
+        openImagePage !== null && {
+          opacity: 0,
+        }]}
+      >
+        <IconButton
+          color="inherit"
+          aria-label="back button"
+          onClick={() => changeCurrentImage(-1)}
+          disableRipple
+          sx={[
+            {
+              padding: 0,
+
+              opacity: 1,
+              transition: 'opacity 0.5s linear',
+            },
+            selectedImage !== null && { opacity: 0 },
+          ]}
+        >
+          <ArrowButtonIcon />
+        </IconButton>
+
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <Typography color="colors.white" sx={{ fontSize: '16px' }}><i>Fine Arts</i></Typography>
+          <Typography color="colors.white" sx={{ fontSize: '9px' }}>Illustrative Collection • 2022</Typography>
+        </Box>
+        <IconButton
+          color="inherit"
+          aria-label="back button"
+          onClick={() => changeCurrentImage(1)}
+          disableRipple
+          sx={[
+            {
+              padding: 0,
+
+              opacity: 1,
+              transition: 'opacity 0.5s linear',
+            },
+            selectedImage !== null && { opacity: 0 },
+          ]}
+        >
+          <ArrowButtonIcon style={{ transform: 'rotate(180deg)' }} />
+        </IconButton>
+      </Box>
 
       <ImageDetails
         imageUrl={images[openImagePage]?.image}

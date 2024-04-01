@@ -5,7 +5,7 @@ export const previewHeight = '358px';
 export const previewGap = '16px';
 
 export const carouselPreviewTranslateYOnHover = '28px';
-export const previewSquareDimension = 'min(min(90vh, 90vw), 700px)';
+export const previewSquareDimension = 'min(min(70vh, 70vw), 700px)';
 export const landingPageStyles = {
   page: {
     height: '100%',
@@ -125,6 +125,13 @@ export const landingPageStyles = {
       + ' transform 0.5s linear',
     cursor: 'initial',
     zIndex: 4,
+  },
+  backButtonDivImageDetailsPage: {
+    transform: 'translateX(0)',
+    opacity: 1,
+    transition: 'opacity 0.5s linear 0.5s,'
+      + ' transform 0.5s linear 0.5s',
+    cursor: 'pointer',
   },
   backButton: {
     padding: 0,
