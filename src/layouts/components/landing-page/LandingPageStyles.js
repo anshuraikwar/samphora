@@ -4,8 +4,8 @@ export const previewWidth = '32px';
 export const previewHeight = '358px';
 export const previewGap = '16px';
 
+export const carouselPreviewTranslateYOnHover = '28px';
 export const previewSquareDimension = 'min(min(90vh, 90vw), 700px)';
-
 export const landingPageStyles = {
   page: {
     height: '100%',
@@ -62,6 +62,25 @@ export const landingPageStyles = {
       + ' border-radius 0.5s linear',
     zIndex: 5,
   },
+  titlePreviewDiv: {
+    position: 'absolute',
+    bottom: previewHeight,
+    right: '50%',
+
+    opacity: 0,
+    transform: 'translate(50%, 0)',
+    transition: 'opacity 0.5s linear,'
+      + ' transform 0.5s linear',
+  },
+  titlePreview: {
+    fontSize: '12px',
+    letterSpacing: '4%',
+  },
+  titlePreviewDivOnHover: {
+    opacity: 1,
+    transform: `translate(50%, calc(-${carouselPreviewTranslateYOnHover} - 16px))`,
+  },
+
   carouselPreviewContent: {
     width: '100%',
     height: '100%',

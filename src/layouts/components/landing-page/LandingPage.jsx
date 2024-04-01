@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 
 // import: styles
 import { Box, IconButton, Typography } from '@mui/material';
-import { landingPageStyles, previewGap, previewWidth } from './LandingPageStyles';
+import {
+  carouselPreviewTranslateYOnHover, landingPageStyles, previewGap, previewWidth,
+} from './LandingPageStyles';
 import { imagePageContentHPadding, imagePageContentMobileHPadding } from '../image-details/ImageDetailsStyles';
 
 // import: assets
@@ -162,17 +164,28 @@ function LandingPage() {
             }}
           >
             <Box
-              id="carousel-preview-content"
+              id={`${image.title}-carousel-preview-content`}
               sx={[landingPageStyles.carouselPreviewContent,
                 (openImagePage === image.id) && { cursor: 'initial' }]}
             >
               <Box
-                id="carousel-image"
+                id={`${image.title}-title-preview`}
+                sx={[
+                  landingPageStyles.titlePreviewDiv,
+                  (hoverImage === image.id) && landingPageStyles.titlePreviewDivOnHover,
+                ]}
+              >
+                <Typography color="colors.white" sx={landingPageStyles.titlePreview}>
+                  <i>{image.title}</i>
+                </Typography>
+              </Box>
+              <Box
+                id={`${image.title}-carousel-image`}
                 sx={[
                   landingPageStyles.carouselImage,
                   { backgroundImage: `url(${image.image})` },
                   (hoverImage === image.id) && {
-                    transform: 'translateY(-28px)',
+                    transform: `translateY(-${carouselPreviewTranslateYOnHover})`,
                   },
                   (selectedImage === image.id
                     || openImagePage === image.id) && {
@@ -181,7 +194,7 @@ function LandingPage() {
                 ]}
               />
               <Box
-                id="square-preview-backdrop-gradient"
+                id={`${image.title}-square-preview-backdrop-gradient`}
                 sx={[
                   landingPageStyles.imageSquarePreviewBackdropGradient,
                   (selectedImage === image.id
@@ -191,7 +204,7 @@ function LandingPage() {
                 ]}
               />
               <Box
-                id="back-button-div"
+                id={`${image.title}-back-button-div`}
                 sx={[
                   landingPageStyles.backButtonDiv,
                   (selectedImage === image.id) && {
@@ -217,7 +230,7 @@ function LandingPage() {
                 </IconButton>
               </Box>
               <Box
-                id="image-title-subtitle"
+                id={`${image.title}-title-subtitle`}
                 sx={[
                   landingPageStyles.imageTitleSubtitleBox,
                   (selectedImage === image.id)
@@ -244,11 +257,14 @@ function LandingPage() {
                 </Box>
                 <Box />
               </Box>
-              <Box sx={[
-                landingPageStyles.carouselDot,
-                (selectedImage === image.id
-                  || openImagePage === image.id) && landingPageStyles.carouselDotSquarePreviewState,
-              ]}
+              <Box
+                id={`${image.title}-dot`}
+                sx={[
+                  landingPageStyles.carouselDot,
+                  (selectedImage === image.id
+                    || openImagePage === image.id)
+                  && landingPageStyles.carouselDotSquarePreviewState,
+                ]}
               />
             </Box>
           </Box>
