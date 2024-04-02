@@ -18,5 +18,5 @@
     font-family: 'Urbanist';
     font-style: normal;
     font-weight: normal;
-    src: local('OPTIBakerDanmarkOne'), url('./assets/fonts/Urbanist-VariableFont_wght.ttf') format('truetype')
+    src: local('Urbanist'), url('./assets/fonts/Urbanist-VariableFont_wght.ttf') format('truetype')
 }
