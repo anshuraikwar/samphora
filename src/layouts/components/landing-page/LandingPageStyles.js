@@ -63,6 +63,29 @@ export const landingPageStyles = {
       border-radius 0.5s ${transitionTimingFunction}`,
     zIndex: 5,
   },
+  squarePreviewStyles: {
+    top: `calc(50vh - (${previewSquareDimension} / 2))`,
+    left: `calc(50vw - (${previewSquareDimension} / 2))`,
+    right: `calc(50vw - (${previewSquareDimension} / 2))`,
+
+    height: previewSquareDimension,
+    padding: 0,
+    borderRadius: '40px',
+
+    zIndex: 6,
+  },
+  imagePageBannerStyles: {
+    top: '0',
+    left: '0',
+    right: '0',
+
+    height: imagePageBannerHeight,
+    padding: '8px 8px 0',
+    borderRadius: '20px',
+
+    zIndex: 7,
+  },
+
   titlePreviewDiv: {
     position: 'absolute',
     bottom: previewHeight,
@@ -116,7 +139,7 @@ export const landingPageStyles = {
   },
   backButtonDiv: {
     position: 'absolute',
-    top: '92px',
+    top: { xs: '55px', md: '92px' },
     left: '13px',
 
     visibility: 'hidden',
@@ -145,7 +168,7 @@ export const landingPageStyles = {
     right: 0,
 
     height: '100%',
-    padding: '0',
+    padding: 0,
 
     display: 'flex',
     flexDirection: 'column',
@@ -161,7 +184,7 @@ export const landingPageStyles = {
     zIndex: 3,
   },
   imageTitleSubtitleBoxSquarePreview: {
-    padding: '32px',
+    padding: { xs: '16px 16px 45px', md: '32px' },
 
     transform: 'translateY(0)',
     transition: `padding 0.5s ${transitionTimingFunction},`
@@ -170,15 +193,15 @@ export const landingPageStyles = {
     opacity: 1,
   },
   imageYear: {
-    fontSize: '16px',
+    fontSize: { xs: '12px', md: '16px' },
     fontWeight: 400,
   },
   imageTitle: {
-    fontSize: '42px',
+    fontSize: { xs: '32px', md: '42px' },
     fontWeight: 500,
   },
   imageSubtitle: {
-    fontSize: '16px',
+    fontSize: { xs: '12px', md: '16px' },
     fontWeight: 400,
   },
   carouselDot: {
@@ -205,26 +228,34 @@ export const landingPageStyles = {
     zIndex: 2,
   },
 
-  squarePreviewStyles: {
-    top: `calc(50vh - (${previewSquareDimension} / 2))`,
-    left: `calc(50vw - (${previewSquareDimension} / 2))`,
-    right: `calc(50vw - (${previewSquareDimension} / 2))`,
+  imageNav: {
+    position: 'absolute',
+    top: {
+      xs: `calc(50vh + (${previewHeight} / 2) + 32px)`,
+      md: `calc(50vh + (${previewHeight} / 2) + 77px)`,
+    },
+    left: '50%',
 
-    height: previewSquareDimension,
+    width: '80vw',
+    maxWidth: '350px',
+
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '36px',
+
+    transform: 'translateX(-50%)',
+    opacity: 1,
+    transition: `top 0.5s ${transitionTimingFunction},`
+      + ` opacity 0.5s ${transitionTimingFunction}`,
+    zIndex: 5,
+  },
+  imageNavButton: {
+    maxWidth: '100px',
     padding: 0,
-    borderRadius: '40px',
 
-    zIndex: 6,
+    opacity: 1,
+    transition: `max-width 0.5s ${transitionTimingFunction}, opacity 0.5s ${transitionTimingFunction}`,
   },
-  imagePageBannerStyles: {
-    top: '0',
-    left: '0',
-    right: '0',
-
-    height: imagePageBannerHeight,
-    padding: '8px 8px 0',
-    borderRadius: '20px',
-
-    zIndex: 7,
-  },
+  imageNavButtonHidden: { maxWidth: 0, opacity: 0 },
 };

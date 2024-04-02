@@ -6,7 +6,6 @@ import {
   carouselPreviewTranslateYOnHover,
   landingPageStyles,
   previewGap,
-  previewHeight,
   previewSquareDimension,
   previewWidth,
 } from './LandingPageStyles';
@@ -27,7 +26,6 @@ import { ReusableComponentIDs } from '../../../constants/enums/ReusableComponent
 // import: components
 import AppBar from '../app-bar/AppBar';
 import ImageDetails from '../image-details/ImageDetails';
-import { transitionTimingFunction } from '../../ui-blocks/ReusableStyles';
 
 // import: lazy load components
 
@@ -175,7 +173,9 @@ function LandingPage() {
               },
             ]}
             onMouseEnter={() => {
-              setHoverImage(image.id);
+              if (selectedImage === null) {
+                setHoverImage(image.id);
+              }
             }}
             onMouseLeave={() => {
               if (selectedImage === null && openImagePage === null) {
@@ -186,8 +186,10 @@ function LandingPage() {
               e.stopPropagation();
               if (selectedImage === image.id) {
                 setOpenImagePage(image.id);
-              } else {
+              } else if (selectedImage === null) {
                 setSelectedImage(image.id);
+              } else if (selectedImage !== null) {
+                setSelectedImage(null);
               }
             }}
           >
@@ -201,6 +203,8 @@ function LandingPage() {
                 sx={[
                   landingPageStyles.titlePreviewDiv,
                   (hoverImage === image.id) && landingPageStyles.titlePreviewDivOnHover,
+                  (selectedImage === image.id
+                    || openImagePage === image.id) && { opacity: 0 },
                 ]}
               >
                 <Typography color="colors.white" sx={landingPageStyles.titlePreview}>
@@ -296,27 +300,13 @@ function LandingPage() {
 
       <Box
         id="image-nav"
-        sx={[{
-          position: 'absolute',
-          top: `calc(50vh + (${previewHeight} / 2) + 77px)`,
-          left: '50%',
-
-          display: 'flex',
-          alignItems: 'center',
-          gap: '36px',
-
-          transform: 'translateX(-50%)',
-          opacity: 1,
-          transition: `top 0.5s ${transitionTimingFunction},`
-            + ` opacity 0.5s ${transitionTimingFunction}`,
-          zIndex: 5,
-        },
-        selectedImage !== null && {
-          top: `calc(50vh + (${previewSquareDimension} / 2) + 16px)`,
-        },
-        openImagePage !== null && {
-          opacity: 0,
-        }]}
+        sx={[landingPageStyles.imageNav,
+          selectedImage !== null && {
+            top: `calc(50vh + (${previewSquareDimension} / 2) + 16px)`,
+          },
+          openImagePage !== null && {
+            opacity: 0,
+          }]}
       >
         <IconButton
           color="inherit"
@@ -324,13 +314,8 @@ function LandingPage() {
           onClick={() => changeCurrentImage(-1)}
           disableRipple
           sx={[
-            {
-              padding: 0,
-
-              opacity: 1,
-              transition: `opacity 0.5s ${transitionTimingFunction}`,
-            },
-            selectedImage !== null && { opacity: 0 },
+            landingPageStyles.imageNavButton,
+            selectedImage !== null && landingPageStyles.imageNavButtonHidden,
           ]}
         >
           <ArrowButtonIcon />
@@ -349,13 +334,8 @@ function LandingPage() {
           onClick={() => changeCurrentImage(1)}
           disableRipple
           sx={[
-            {
-              padding: 0,
-
-              opacity: 1,
-              transition: `opacity 0.5s ${transitionTimingFunction}`,
-            },
-            selectedImage !== null && { opacity: 0 },
+            landingPageStyles.imageNavButton,
+            selectedImage !== null && landingPageStyles.imageNavButtonHidden,
           ]}
         >
           <ArrowButtonIcon style={{ transform: 'rotate(180deg)' }} />

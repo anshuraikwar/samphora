@@ -21,7 +21,7 @@ export const imageDetailsStyles = {
   },
   imagePageContent: {
     width: '100%',
-    padding: '24px 0',
+    padding: '24px 0 100px',
 
     display: 'flex',
     flexDirection: 'column',
