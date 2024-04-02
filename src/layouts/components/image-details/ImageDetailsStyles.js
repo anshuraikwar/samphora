@@ -1,3 +1,5 @@
+import { transitionTimingFunction } from '../../ui-blocks/ReusableStyles';
+
 export const imagePageBannerHeight = '300px';
 
 export const imagePageContentHPadding = '24vw';
@@ -13,7 +15,7 @@ export const imageDetailsStyles = {
 
     padding: { xs: `0 ${imagePageContentMobileHPadding}`, md: `0 ${imagePageContentHPadding}` },
 
-    transition: 'top 0.5s linear',
+    transition: `top 0.5s ${transitionTimingFunction}`,
     overflow: 'auto',
     zIndex: 5,
   },

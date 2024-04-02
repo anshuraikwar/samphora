@@ -1,4 +1,5 @@
 import { imagePageBannerHeight } from '../image-details/ImageDetailsStyles';
+import { transitionTimingFunction } from '../../ui-blocks/ReusableStyles';
 
 export const previewWidth = '32px';
 export const previewHeight = '358px';
@@ -37,7 +38,7 @@ export const landingPageStyles = {
     backgroundPosition: 'center',
 
     opacity: 0,
-    transition: 'opacity 0.5s linear',
+    transition: `opacity 0.5s ${transitionTimingFunction}`,
     zIndex: 1,
   },
   carouselImagePreview: {
@@ -52,14 +53,14 @@ export const landingPageStyles = {
 
     opacity: 1,
 
-    transition: 'top 0.5s linear,'
-      + ' left 0.5s linear,'
-      + ' right 0.5s linear,'
-      + ' height 0.5s linear,'
-      + ' background-color 0.5s linear,'
-      + ' padding 0.5s linear,'
-      + ' opacity 0.5s linear,'
-      + ' border-radius 0.5s linear',
+    transition: `top 0.5s ${transitionTimingFunction},
+      left 0.5s ${transitionTimingFunction},
+      right 0.5s ${transitionTimingFunction},
+      height 0.5s ${transitionTimingFunction},
+      background-color 0.5s ${transitionTimingFunction},
+      padding 0.5s ${transitionTimingFunction},
+      opacity 0.5s ${transitionTimingFunction},
+      border-radius 0.5s ${transitionTimingFunction}`,
     zIndex: 5,
   },
   titlePreviewDiv: {
@@ -69,8 +70,8 @@ export const landingPageStyles = {
 
     opacity: 0,
     transform: 'translate(50%, 0)',
-    transition: 'opacity 0.5s linear,'
-      + ' transform 0.5s linear',
+    transition: `opacity 0.5s ${transitionTimingFunction},`
+      + ` transform 0.5s ${transitionTimingFunction}`,
   },
   titlePreview: {
     fontSize: '12px',
@@ -99,7 +100,7 @@ export const landingPageStyles = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
 
-    transition: 'transform 0.5s linear',
+    transition: `transform 0.5s ${transitionTimingFunction}`,
     zIndex: 1,
   },
   imageSquarePreviewBackdropGradient: {
@@ -110,7 +111,7 @@ export const landingPageStyles = {
 
     background: 'linear-gradient(rgb(0,0,0,0), rgb(0,0,0,0.6))',
     opacity: 0,
-    transition: 'opacity 0.5s linear',
+    transition: `opacity 0.5s ${transitionTimingFunction}`,
     zIndex: 2,
   },
   backButtonDiv: {
@@ -121,16 +122,16 @@ export const landingPageStyles = {
     visibility: 'hidden',
     transform: 'translateX(-100px)',
     opacity: 0,
-    transition: 'opacity 0.5s linear,'
-      + ' transform 0.5s linear',
+    transition: `opacity 0.5s ${transitionTimingFunction},`
+      + ` transform 0.5s ${transitionTimingFunction}`,
     cursor: 'initial',
     zIndex: 4,
   },
   backButtonDivImageDetailsPage: {
     transform: 'translateX(0)',
     opacity: 1,
-    transition: 'opacity 0.5s linear 0.5s,'
-      + ' transform 0.5s linear 0.5s',
+    transition: `opacity 0.5s ${transitionTimingFunction} 0.5s,`
+      + ` transform 0.5s ${transitionTimingFunction} 0.5s`,
     cursor: 'pointer',
   },
   backButton: {
@@ -153,9 +154,9 @@ export const landingPageStyles = {
 
     transform: 'translateY(32px)',
     opacity: 0,
-    transition: 'padding 0.5s linear,'
-      + ' opacity 0.5s linear,'
-      + ' transform 0.5s linear',
+    transition: `padding 0.5s ${transitionTimingFunction},`
+      + ` opacity 0.5s ${transitionTimingFunction},`
+      + ` transform 0.5s ${transitionTimingFunction}`,
     overflow: 'hidden',
     zIndex: 3,
   },
@@ -163,9 +164,9 @@ export const landingPageStyles = {
     padding: '32px',
 
     transform: 'translateY(0)',
-    transition: 'padding 0.5s linear,'
-      + ' opacity 0.5s linear 0.5s,'
-      + ' transform 0.5s linear 0.5s',
+    transition: `padding 0.5s ${transitionTimingFunction},`
+      + ` opacity 0.5s ${transitionTimingFunction} 0.5s,`
+      + ` transform 0.5s ${transitionTimingFunction} 0.5s`,
     opacity: 1,
   },
   imageYear: {
@@ -191,9 +192,9 @@ export const landingPageStyles = {
     border: '1px solid rgba(255, 255, 255, 0.5)',
 
     transform: 'translateX(50%)',
-    transition: 'bottom 0.5s linear,'
-      + ' right 0.5s linear,'
-      + 'transform 0.5s linear',
+    transition: `bottom 0.5s ${transitionTimingFunction},`
+      + ` right 0.5s ${transitionTimingFunction},`
+      + ` transform 0.5s ${transitionTimingFunction}`,
     zIndex: 0,
   },
   carouselDotSquarePreviewState: {

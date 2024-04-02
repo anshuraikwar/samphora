@@ -27,6 +27,7 @@ import { ReusableComponentIDs } from '../../../constants/enums/ReusableComponent
 // import: components
 import AppBar from '../app-bar/AppBar';
 import ImageDetails from '../image-details/ImageDetails';
+import { transitionTimingFunction } from '../../ui-blocks/ReusableStyles';
 
 // import: lazy load components
 
@@ -63,6 +64,7 @@ function LandingPage() {
 
   const closeImageDetailsPage = (e) => {
     e.stopPropagation();
+
     if (openImagePage !== null) {
       setHoverImage(openImagePage);
     } else if (selectedImage !== null) {
@@ -305,8 +307,8 @@ function LandingPage() {
 
           transform: 'translateX(-50%)',
           opacity: 1,
-          transition: 'top 0.5s linear,'
-            + ' opacity 0.5s linear',
+          transition: `top 0.5s ${transitionTimingFunction},`
+            + ` opacity 0.5s ${transitionTimingFunction}`,
           zIndex: 5,
         },
         selectedImage !== null && {
@@ -326,7 +328,7 @@ function LandingPage() {
               padding: 0,
 
               opacity: 1,
-              transition: 'opacity 0.5s linear',
+              transition: `opacity 0.5s ${transitionTimingFunction}`,
             },
             selectedImage !== null && { opacity: 0 },
           ]}
@@ -351,7 +353,7 @@ function LandingPage() {
               padding: 0,
 
               opacity: 1,
-              transition: 'opacity 0.5s linear',
+              transition: `opacity 0.5s ${transitionTimingFunction}`,
             },
             selectedImage !== null && { opacity: 0 },
           ]}
