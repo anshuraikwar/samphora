@@ -336,7 +336,10 @@ function LandingPage() {
 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <Typography color="colors.white" sx={{ fontSize: '16px' }}><i>Fine Arts</i></Typography>
-          <Typography color="colors.white" sx={{ fontSize: '9px' }}>Illustrative Collection • 2022</Typography>
+          <Typography color="colors.white" sx={{ fontSize: '9px', letterSpacing: '1px' }}>
+            Illustrative Collection •
+            2022
+          </Typography>
         </Box>
         <IconButton
           color="inherit"

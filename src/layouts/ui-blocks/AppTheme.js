@@ -48,7 +48,7 @@ const appThemeWithoutCustomStyles = createTheme({
     },
   },
   typography: {
-    fontFamily: Fonts.INHERIT,
+    fontFamily: Fonts.URBANIST,
     skHeight: '1em',
     pxToRem: (value) => value / 16,
     scrollMarginTop: 'calc(var(--MuiDocs-header-height) + 32px)',

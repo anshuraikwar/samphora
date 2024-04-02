@@ -44,6 +44,23 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+
+    <!--    -->
+    <!--  PRELOAD FONTS  -->
+    <!--    -->
+    <link as="font" crossorigin href="/fonts/Urbanist-VariableFont_wght.ttf"
+          onload="this.onload=null;this.rel='stylesheet'"
+          rel="preload" type="font/ttf">
+    <style>
+        @font-face {
+            font-family: 'Urbanist';
+            src: url('/fonts/Urbanist-VariableFont_wght.ttf') format('truetype')
+        }
+    </style>
+    <!--    -->
+    <!--  End PRELOAD FONTS  -->
+    <!--    -->
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
