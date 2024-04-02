@@ -9,6 +9,7 @@ import { appBarStyles } from './AppBarStyles';
 // import: assets
 import { ReactComponent as MenuIcon } from '../../../assets/svg/menu.svg';
 import { ReactComponent as CrossIcon } from '../../../assets/svg/cross.svg';
+import { ReactComponent as Logo } from '../../../assets/svg/logo.svg';
 
 // import: config
 // import: constants
@@ -41,16 +42,20 @@ function AppBar() {
         id="app-bar"
         sx={appBarStyles.appBar}
       >
-        <Typography
-          color="colors.white"
-          sx={{
-            fontSize: '18px',
-            fontWeight: 500,
-            cursor: 'pointer',
-          }}
-        >
-          Samphora
-        </Typography>
+        <Box id="logo" sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <Logo />
+          <Typography
+            color="colors.white"
+            sx={{
+              fontSize: '18px',
+              fontWeight: 500,
+              cursor: 'pointer',
+            }}
+          >
+            Samphora
+          </Typography>
+        </Box>
+
         <Box
           id="nav"
           sx={appBarStyles.nav}
