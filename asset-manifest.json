@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/samphora/static/css/main.ffd9848e.css",
+    "main.css": "/samphora/static/css/main.32504d72.css",
     "main.js": "/samphora/static/js/main.07ad35a6.js",
     "static/media/vase_of_flowers.webp": "/samphora/static/media/vase_of_flowers.580be70ac9b4352913b1.webp",
     "static/media/quasar.webp": "/samphora/static/media/quasar.0dff3cd8d146812c474e.webp",
@@ -15,11 +15,11 @@
     "static/media/arrow-button.svg": "/samphora/static/media/arrow-button.403d73b4d6861601b5742822312d0f05.svg",
     "static/media/menu.svg": "/samphora/static/media/menu.f0f337765bd070718e1c036bcf7771e1.svg",
     "static/media/cross.svg": "/samphora/static/media/cross.618480b10773aad6581f951863dd4a3f.svg",
-    "main.ffd9848e.css.map": "/samphora/static/css/main.ffd9848e.css.map",
+    "main.32504d72.css.map": "/samphora/static/css/main.32504d72.css.map",
     "main.07ad35a6.js.map": "/samphora/static/js/main.07ad35a6.js.map"
   },
   "entrypoints": [
-    "static/css/main.ffd9848e.css",
+    "static/css/main.32504d72.css",
     "static/js/main.07ad35a6.js"
   ]
 }
