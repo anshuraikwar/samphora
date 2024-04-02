@@ -162,6 +162,7 @@ function LandingPage() {
       />
       {Object.values(images).map((image) => (
         <Box
+          key={`bg-${image.id}`}
           id={`bg-${image.id}`}
           sx={[
             landingPageStyles.imageBackground,

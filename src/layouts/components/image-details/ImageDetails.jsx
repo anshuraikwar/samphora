@@ -117,10 +117,16 @@ function ImageDetails({
   );
 }
 
+ImageDetails.defaultProps = {
+  imageUrl: '',
+  selectedImage: null,
+  openImagePage: null,
+};
+
 ImageDetails.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
-  selectedImage: PropTypes.string.isRequired,
-  openImagePage: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
+  selectedImage: PropTypes.string,
+  openImagePage: PropTypes.string,
   closeImageDetailsPage: PropTypes.func.isRequired,
 };
 
