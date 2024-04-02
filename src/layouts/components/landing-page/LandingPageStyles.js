@@ -115,7 +115,7 @@ export const landingPageStyles = {
   },
   backButtonDiv: {
     position: 'absolute',
-    top: '45px',
+    top: '92px',
     left: '13px',
 
     visibility: 'hidden',

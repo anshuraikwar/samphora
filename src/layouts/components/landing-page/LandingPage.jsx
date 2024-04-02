@@ -36,40 +36,81 @@ function LandingPage() {
   const [openImagePage, setOpenImagePage] = useState(null);
 
   const changeCurrentImage = useCallback((step) => {
-    let currentIndex;
-    if (step > 0) {
-      currentIndex = -1;
-      if (hoverImage !== null) {
-        currentIndex = Object.keys(images).indexOf(hoverImage);
-      }
-      if (currentIndex === Object.keys(images).length - 1) {
+    if (selectedImage === null && openImagePage === null) {
+      let currentIndex;
+      if (step > 0) {
         currentIndex = -1;
-      }
-    } else {
-      currentIndex = Object.keys(images).length;
-      if (hoverImage !== null) {
-        currentIndex = Object.keys(images).indexOf(hoverImage);
-      }
-      if (currentIndex === 0) {
+        if (hoverImage !== null) {
+          currentIndex = Object.keys(images).indexOf(hoverImage);
+        }
+        if (currentIndex === Object.keys(images).length - 1) {
+          currentIndex = -1;
+        }
+      } else {
         currentIndex = Object.keys(images).length;
+        if (hoverImage !== null) {
+          currentIndex = Object.keys(images).indexOf(hoverImage);
+        }
+        if (currentIndex === 0) {
+          currentIndex = Object.keys(images).length;
+        }
       }
-    }
 
-    setHoverImage(() => Object.keys(images)[currentIndex + step]);
-  }, [hoverImage]);
+      const newImage = Object.keys(images)[currentIndex + step];
+      setHoverImage(() => newImage);
+    }
+  }, [hoverImage, selectedImage, openImagePage]);
+
+  const closeImageDetailsPage = (e) => {
+    e.stopPropagation();
+    if (openImagePage !== null) {
+      setHoverImage(openImagePage);
+    } else if (selectedImage !== null) {
+      setHoverImage(selectedImage);
+    }
+    setOpenImagePage(null);
+    setSelectedImage(null);
+
+    const element = document.getElementById(ReusableComponentIDs.IMAGE_DETAIL_PAGE_SCROLL_TO_TOP);
+    if (element) {
+      element.scrollIntoView({ block: 'end' });
+    }
+  };
 
   const keyDownHandler = useCallback((e) => {
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      e.stopPropagation();
-      changeCurrentImage(-1);
+    switch (e.key) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        e.stopPropagation();
+        changeCurrentImage(-1);
+        break;
+
+      case 'ArrowRight':
+        e.preventDefault();
+        e.stopPropagation();
+        changeCurrentImage(1);
+        break;
+
+      case 'Enter':
+        e.preventDefault();
+        e.stopPropagation();
+        if (selectedImage !== null) {
+          setOpenImagePage(selectedImage);
+        } else if (hoverImage !== null) {
+          setSelectedImage(hoverImage);
+        }
+        break;
+
+      case 'Escape':
+        e.preventDefault();
+        e.stopPropagation();
+        closeImageDetailsPage(e);
+        break;
+
+      default:
+        break;
     }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      e.stopPropagation();
-      changeCurrentImage(1);
-    }
-  }, [changeCurrentImage]);
+  }, [changeCurrentImage, openImagePage, selectedImage, hoverImage]);
 
   useEffect(() => {
     document.addEventListener('keydown', keyDownHandler);
@@ -78,15 +119,6 @@ function LandingPage() {
       document.removeEventListener('keydown', keyDownHandler);
     };
   }, [keyDownHandler]);
-  const closeImageDetailsPage = (e) => {
-    e.stopPropagation();
-    setSelectedImage(null);
-    setOpenImagePage(() => null);
-    const element = document.getElementById(ReusableComponentIDs.IMAGE_DETAIL_PAGE_SCROLL_TO_TOP);
-    if (element) {
-      element.scrollIntoView({ block: 'end' });
-    }
-  };
 
   return (
     <Box
@@ -144,7 +176,9 @@ function LandingPage() {
               setHoverImage(image.id);
             }}
             onMouseLeave={() => {
-              setHoverImage(null);
+              if (selectedImage === null && openImagePage === null) {
+                setHoverImage(null);
+              }
             }}
             onClick={(e) => {
               e.stopPropagation();
