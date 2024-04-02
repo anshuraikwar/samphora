@@ -258,4 +258,12 @@ export const landingPageStyles = {
     transition: `max-width 0.5s ${transitionTimingFunction}, opacity 0.5s ${transitionTimingFunction}`,
   },
   imageNavButtonHidden: { maxWidth: 0, opacity: 0 },
+
+  credits: {
+    position: 'absolute',
+    bottom: '8px',
+    right: '8px',
+
+    zIndex: 5,
+  },
 };

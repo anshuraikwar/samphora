@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 // import: styles
-import { Box, IconButton, Typography } from '@mui/material';
+import {
+  Box, IconButton, Link, Typography,
+} from '@mui/material';
 import {
   carouselPreviewTranslateYOnHover,
   landingPageStyles,
@@ -348,6 +350,12 @@ function LandingPage() {
         openImagePage={openImagePage}
         closeImageDetailsPage={closeImageDetailsPage}
       />
+
+      <Box id="credits" sx={landingPageStyles.credits}>
+        <Link href="https://dribbble.com/shots/21531038-Admirations" target="_blank">
+          <Typography color="colors.white" sx={{ fontSize: '12px' }}>Credits</Typography>
+        </Link>
+      </Box>
     </Box>
   );
 }
