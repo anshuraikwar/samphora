@@ -304,7 +304,10 @@ function LandingPage() {
         id="image-nav"
         sx={[landingPageStyles.imageNav,
           selectedImage !== null && {
-            top: `calc(50vh + (${previewSquareDimension} / 2) + 16px)`,
+            top: {
+              xs: `calc(50vh + (${previewSquareDimension} / 2) + 16px)`,
+              md: `calc(50vh + (${previewSquareDimension} / 2) + 16px)`,
+            },
           },
           openImagePage !== null && {
             opacity: 0,
