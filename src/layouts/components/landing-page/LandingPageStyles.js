@@ -113,6 +113,19 @@ export const landingPageStyles = {
     position: 'relative',
     cursor: 'pointer',
   },
+  carouselImageMouseEventsOverlay: {
+    position: 'absolute',
+    top: '50%',
+    right: '50%',
+    borderRadius: 'inherit',
+
+    height: previewHeight,
+    width: previewWidth,
+
+    visibility: 'visible',
+    transform: 'translate(50%, -50%)',
+    zIndex: 5,
+  },
   carouselImage: {
     position: 'relative',
 

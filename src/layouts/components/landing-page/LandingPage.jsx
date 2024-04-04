@@ -174,23 +174,13 @@ function LandingPage() {
                 opacity: 0,
               },
             ]}
-            onMouseEnter={() => {
-              if (selectedImage === null) {
-                setHoverImage(image.id);
-              }
-            }}
-            onMouseLeave={() => {
-              if (selectedImage === null && openImagePage === null) {
-                setHoverImage(null);
-              }
-            }}
             onClick={(e) => {
               e.stopPropagation();
               if (selectedImage === image.id) {
                 setOpenImagePage(image.id);
               } else if (selectedImage === null) {
                 setSelectedImage(image.id);
-              } else if (selectedImage !== null) {
+              } else {
                 setSelectedImage(null);
               }
             }}
@@ -200,6 +190,24 @@ function LandingPage() {
               sx={[landingPageStyles.carouselPreviewContent,
                 (openImagePage === image.id) && { cursor: 'initial' }]}
             >
+              <Box
+                id={`carousel-${image.title}-image-overlay`}
+                sx={[landingPageStyles.carouselImageMouseEventsOverlay,
+                  (selectedImage !== null
+                    || openImagePage !== null) && {
+                    visibility: 'hidden',
+                  }]}
+                onMouseEnter={() => {
+                  if (selectedImage === null) {
+                    setHoverImage(image.id);
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (selectedImage === null && openImagePage === null) {
+                    setHoverImage(null);
+                  }
+                }}
+              />
               <Box
                 id={`${image.title}-title-preview`}
                 sx={[
