@@ -42,15 +42,11 @@ function AppBar() {
         id="app-bar"
         sx={appBarStyles.appBar}
       >
-        <Box id="logo" sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+        <Box id="logo" sx={appBarStyles.logo}>
           <Logo />
           <Typography
             color="colors.white"
-            sx={{
-              fontSize: '18px',
-              fontWeight: 500,
-              cursor: 'pointer',
-            }}
+            sx={appBarStyles.logoText}
           >
             Samphora
           </Typography>
@@ -97,6 +93,11 @@ function AppBar() {
             display: { xs: 'flex', md: 'none' },
 
             ...(openDrawer && { display: 'none' }),
+
+            '& svg': {
+              height: { xs: '16px', md: '24px' },
+              width: 'auto',
+            },
           }}
         >
           <MenuIcon />

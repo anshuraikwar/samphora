@@ -364,7 +364,7 @@ function LandingPage() {
 
       <Box id="credits" sx={landingPageStyles.credits}>
         <Link href="https://dribbble.com/shots/21531038-Admirations" target="_blank">
-          <Typography color="colors.white" sx={{ fontSize: '12px' }}>Credits</Typography>
+          <Typography color="colors.white" sx={{ fontSize: { xs: '8px', md: '12px' } }}>Credits</Typography>
         </Link>
       </Box>
     </Box>

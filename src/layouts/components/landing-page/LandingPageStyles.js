@@ -1,8 +1,8 @@
 import { imagePageBannerHeight } from '../image-details/ImageDetailsStyles';
 import { transitionTimingFunction } from '../../ui-blocks/ReusableStyles';
 
-export const previewWidth = '32px';
-export const previewHeight = '358px';
+export const previewWidth = 'min(32px, 8vw)';
+export const previewHeight = 'min(358px, 40vh)';
 export const previewGap = '16px';
 
 export const carouselPreviewTranslateYOnHover = '28px';
@@ -249,13 +249,13 @@ export const landingPageStyles = {
     },
     left: '50%',
 
-    width: '80vw',
+    width: '90vw',
     maxWidth: '350px',
 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: '36px',
+    gap: { xs: '12px', md: '36px' },
 
     transform: 'translateX(-50%)',
     opacity: 1,
@@ -269,6 +269,11 @@ export const landingPageStyles = {
 
     opacity: 1,
     transition: `max-width 0.5s ${transitionTimingFunction}, opacity 0.5s ${transitionTimingFunction}`,
+
+    '& svg': {
+      height: { xs: '24px', md: '35px' },
+      width: 'auto',
+    },
   },
   imageNavButtonHidden: { maxWidth: 0, opacity: 0 },
 

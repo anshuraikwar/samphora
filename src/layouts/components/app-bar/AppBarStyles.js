@@ -5,13 +5,28 @@ export const appBarStyles = {
     left: 0,
     right: 0,
 
-    padding: '21px',
+    padding: { xs: '16px', md: '21px' },
 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
 
     zIndex: 10,
+  },
+  logo: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+
+    '& svg': {
+      height: { xs: '16px', md: '24px' },
+      width: 'auto',
+    },
+  },
+  logoText: {
+    fontSize: { xs: '14px', md: '18px' },
+    fontWeight: 500,
+    cursor: 'pointer',
   },
   nav: {
     display: { xs: 'none', md: 'flex' },
