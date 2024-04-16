@@ -334,7 +334,7 @@ function LandingPage() {
           <ArrowButtonIcon />
         </IconButton>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: '2px', md: '8px' } }}>
           <Typography color="colors.white" sx={{ fontSize: '16px' }}><i>Fine Arts</i></Typography>
           <Typography color="colors.white" sx={{ fontSize: '9px', letterSpacing: '1px' }}>
             Illustrative Collection •

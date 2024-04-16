@@ -3,7 +3,7 @@ import { transitionTimingFunction } from '../../ui-blocks/ReusableStyles';
 
 export const previewWidth = 'min(32px, 8vw)';
 export const previewHeight = 'min(358px, 40vh)';
-export const previewGap = '16px';
+export const previewGap = 'min(16px, 4vw)';
 
 export const carouselPreviewTranslateYOnHover = '28px';
 export const previewSquareDimension = 'min(min(70vh, 70vw), 700px)';
@@ -44,7 +44,7 @@ export const landingPageStyles = {
   carouselImagePreview: {
     height: previewHeight,
     padding: 0,
-    borderRadius: '8px',
+    borderRadius: { xs: '4px', md: '8px' },
 
     position: 'absolute',
     top: `calc(50vh - ( ${previewHeight} / 2 ))`,
@@ -222,8 +222,8 @@ export const landingPageStyles = {
     bottom: 0,
     right: '50%',
 
-    height: '16px',
-    width: '16px',
+    height: { xs: '12px', md: '16px' },
+    width: { xs: '12px', md: '16px' },
     borderRadius: '50%',
     border: '1px solid rgba(255, 255, 255, 0.5)',
 
