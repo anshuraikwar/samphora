@@ -29,15 +29,17 @@ A React web app prototype featuring a virtual gallery with seamless hover intera
 
 ## Project structure
 
-- `src/`
-  - `App.jsx`
-  - `index.jsx`
-  - `layouts/`
-  - `components/`
-  - `assets/`
-  - `configs/`
-- `public/`
-- `package.json`
+```
+  |- src
+    |- App.jsx
+    |- index.jsx
+    |- layouts
+    |- components
+    |- assets
+    |- configs
+  |- public
+  |- package.json
+```
 
 ## Author
 
