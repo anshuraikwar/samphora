@@ -22,9 +22,6 @@ function App() {
       sx={[
         { backgroundColor: colorPalette.background },
       ]}
-      onScroll={() => {
-        // any scroll dependent func
-      }}
     >
       <ThemeProvider theme={appTheme}>
         <LandingPage />

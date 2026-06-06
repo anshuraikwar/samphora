@@ -16,7 +16,7 @@ import Sidebar from './components/sidebar/Sidebar';
 
 export default function Layout() {
   return (
-    <Box id=layout sx={layoutStyles.parentContainer}>
+    <Box id="layout" sx={layoutStyles.parentContainer}>
       <Sidebar />
       <Outlet />
     </Box>
